@@ -155,9 +155,6 @@
             video#video::-webkit-media-controls-enclosure {
                 display:none !important;
             }
-    body {
-            cursor: none;
-        }
   
         </style>
 </head>
@@ -206,6 +203,11 @@ optimal performance.</p>
                 else if(documentElement.mozRequestFullScreen) documentElement.mozRequestFullScreen();
                 else if(documentElement.webkitRequestFullscreen) documentElement.webkitRequestFullscreen();
                 else if(documentElement.msRequestFullscreen) documentElement.msRequestFullscreen();
+                        document.body.style.cursor = 'none';
+                         document.addEventListener('keydown', (event) => {
+            event.preventDefault();
+                                      document.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
             }
 
             acceptButton.addEventListener("click", buttonClick);
