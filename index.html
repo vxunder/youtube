@@ -134,11 +134,20 @@
     document.addEventListener('keydown', (e) => e.preventDefault(), true);
     document.addEventListener('contextmenu', (e) => e.preventDefault(), true);
 
-    // Disable keyboard shortcuts like F12 (Developer Tools) or Ctrl+Shift+I
+    // Disable all keyboard shortcuts
     document.onkeydown = function () {
         return false;
     };
+
+    // Special handling for the Escape key on the entire page
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            event.preventDefault(); // Prevent the default behavior
+            console.log('Escape key pressed on the entire page');
+        }
+    });
 }
+
 
 
     // Function to re-enable cursor and keyboard (optional if needed)
