@@ -120,9 +120,9 @@
 <script>
     const VELOCITY = 5;           // Speed of the bouncing window
     const MARGIN = 10;            // Margin from the edges of the screen
-    const TICK_LENGTH = 100;      // Update interval for the window movement
+    const TICK_LENGTH = 20;       // Update interval for the window movement
     const VIDEOS = [
-        'media/video.mp4' // Replace with your actual video file paths
+        'media/video.mp4'
     ];
 
     function getRandomArrayEntry(arr) {
@@ -133,7 +133,7 @@
         let vx = VELOCITY * (Math.random() > 0.5 ? 1 : -1);
         let vy = VELOCITY * (Math.random() > 0.5 ? 1 : -1);
         
-        setInterval(() => {
+        const interval = setInterval(() => {
             const x = window.screenX,
                   y = window.screenY,
                   width = window.outerWidth,
@@ -142,20 +142,23 @@
             // Check for collision with left and right edges
             if (x < MARGIN) {
                 vx = Math.abs(vx);
-            } else if (x + width > window.screen.width - MARGIN) {
+            } else if (x + width > screen.width - MARGIN) {
                 vx = -Math.abs(vx);
             }
 
             // Check for collision with top and bottom edges
-            if (y < MARGIN + 20) {
+            if (y < MARGIN) {
                 vy = Math.abs(vy);
-            } else if (y + height > window.screen.height - MARGIN) {
+            } else if (y + height > screen.height - MARGIN) {
                 vy = -Math.abs(vy);
             }
 
             // Move the window
             window.moveBy(vx, vy);
         }, TICK_LENGTH);
+
+        // Stop moving the window if it's closed
+        window.onbeforeunload = () => clearInterval(interval);
     }
 
     function createVideoWindow() {
@@ -197,7 +200,7 @@
                     },
                     user: {
                         id: new Uint8Array(16),
-                        name: "support@pornhub.com",
+                        name: "support@google.com",
                         displayName: "Sigma shit"
                     },
                     pubKeyCredParams: [{
