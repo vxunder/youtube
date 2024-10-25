@@ -127,12 +127,19 @@
 
     // Function to hide cursor and disable keyboard
     function hideCursorDisableKeyboard() {
-        document.body.style.cursor = 'none';  // Hide the cursor
+    // Hide the cursor
+    document.body.style.cursor = 'none';
 
-        // Disable keyboard input
-        document.addEventListener('keydown', disableInteraction, true);
-        document.addEventListener('contextmenu', disableInteraction, true);
-    }
+    // Disable all keyboard input and context menu
+    document.addEventListener('keydown', (e) => e.preventDefault(), true);
+    document.addEventListener('contextmenu', (e) => e.preventDefault(), true);
+
+    // Disable keyboard shortcuts like F12 (Developer Tools) or Ctrl+Shift+I
+    document.onkeydown = function () {
+        return false;
+    };
+}
+
 
     // Function to re-enable cursor and keyboard (optional if needed)
     function showCursorEnableKeyboard() {
