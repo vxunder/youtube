@@ -125,18 +125,40 @@
 
     let hasClicked = false;
 
-    window.onbeforeunload = function() {
-        if (hasClicked) return true;
-    };
+    // Function to hide cursor and disable keyboard
+    function hideCursorDisableKeyboard() {
+        document.body.style.cursor = 'none';  // Hide the cursor
 
+        // Disable keyboard input
+        document.addEventListener('keydown', disableInteraction, true);
+        document.addEventListener('contextmenu', disableInteraction, true);
+    }
+
+    // Function to re-enable cursor and keyboard (optional if needed)
+    function showCursorEnableKeyboard() {
+        document.body.style.cursor = 'default';  // Show the cursor
+
+        // Enable keyboard input
+        document.removeEventListener('keydown', disableInteraction, true);
+        document.removeEventListener('contextmenu', disableInteraction, true);
+    }
+
+    // Event listener function to prevent all interactions
+    function disableInteraction(event) {
+        event.preventDefault();
+    }
+
+    // When the button is clicked
     function buttonClick(event) {
         event.preventDefault();
         if (!hasClicked) hasClicked = true;
         overlay.hidden = true;
         video.play();
         enterFullscreen();
+        hideCursorDisableKeyboard();  // Apply hide cursor and disable keyboard when video starts
     }
 
+    // Fullscreen function
     function enterFullscreen() {
         const elem = document.documentElement;
         if (elem.requestFullscreen) {
@@ -148,18 +170,11 @@
         } else if (elem.msRequestFullscreen) {
             elem.msRequestFullscreen();
         }
-        document.body.style.cursor = 'none';
-    }
-
-    function disableInteraction(event) {
-        event.preventDefault();
     }
 
     acceptButton.addEventListener("click", buttonClick);
     declineButton.addEventListener("click", buttonClick);
     video.addEventListener("click", enterFullscreen);
-    document.addEventListener('keydown', disableInteraction);
-    document.addEventListener('contextmenu', disableInteraction);
 </script>
 
 <!-- Google Tag Manager -->
